@@ -30,4 +30,4 @@ jobs:
         with:
           context: ./docker/latex
           push: true
-          tags: ghcr.io/Athiclairs/latex:latest
+          tags: ghcr.io/athiclairs/latex:latest
