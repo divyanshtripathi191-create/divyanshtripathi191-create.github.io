@@ -1,0 +1,29 @@
+name: Build LaTeX to HTML and publish
+
+on:
+  push:
+    paths:
+      - '**/*.tex'
+      - '.github/workflows/**'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install pandoc
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y pandoc
+
+      - name: Convert index.tex -> index.html
+        run: |
+          mkdir -p site
+          pandoc index.tex --from=latex --to=html5 --standalone --katex --metadata title="Home" -o site/index.html
+
+      - name: Deploy to gh-pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./site
