@@ -13,15 +13,14 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v4
 
-      - name: Install compact TeX packages
+      - name: Install compact TeX packages (apt names that exist)
         run: |
           sudo apt-get update -y
-          # compact set oriented to math documents (much smaller than texlive-full)
           sudo apt-get install -y \
             texlive-latex-recommended \
             texlive-latex-extra \
             texlive-fonts-recommended \
-            texlive-math-extra \
+            texlive-binaries \
             fonts-dejavu-core \
             poppler-utils
 
@@ -30,13 +29,14 @@ jobs:
         run: |
           mkdir -p site
           set -o pipefail
-          # run pdflatex twice for references if needed; capture exit status
           pdflatex -interaction=nonstopmode -halt-on-error -output-directory=site index.tex > site/pdflatex.log 2>&1 || true
           pdflatex -interaction=nonstopmode -halt-on-error -output-directory=site index.tex >> site/pdflatex.log 2>&1 || true
           if [ -f site/index.pdf ]; then
             echo "compiled=1" >> $GITHUB_OUTPUT
           else
             echo "compiled=0" >> $GITHUB_OUTPUT
+            echo "---- pdflatex.log ----"
+            sed -n '1,200p' site/pdflatex.log || true
           fi
 
       - name: If build failed, install full texlive and retry
@@ -45,14 +45,13 @@ jobs:
           echo "Compact build failed; installing texlive-full (this may take ~10-25 minutes) and retrying..."
           sudo apt-get update -y
           sudo apt-get install -y texlive-full
-          # retry build (twice)
           pdflatex -interaction=nonstopmode -halt-on-error -output-directory=site index.tex > site/pdflatex.log 2>&1 || true
           pdflatex -interaction=nonstopmode -halt-on-error -output-directory=site index.tex >> site/pdflatex.log 2>&1 || true
           if [ -f site/index.pdf ]; then
             echo "Full build succeeded"
           else
-            echo "PDF build still failed; see site/pdflatex.log"
-            cat site/pdflatex.log
+            echo "PDF build still failed; printing log"
+            sed -n '1,400p' site/pdflatex.log || true
             exit 1
           fi
 
